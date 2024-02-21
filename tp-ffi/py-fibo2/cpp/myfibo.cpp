@@ -13,6 +13,7 @@ int fiboNaive(int n) {
 PYBIND11_MODULE(myfibo, m) {
 
     // TODO export fiboNaive (as fibo_naive)
+    m.def("fibo_naive", &fiboNaive);
 
     // TODO export fiboIterative (as fibo_iterative)
 

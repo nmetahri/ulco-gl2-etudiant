@@ -6,20 +6,22 @@ struct Product {
     std::string _desc;
 };
 
-class Store : std::vector<Product> {
+class Store{
     public:
     void addProduct(const Product & product) {
-        return push_back(product);
+        return _data.push_back(product);
     }
 
     int nbProducts() {
-        return size();
+        return _data.size();
     }
 
     void print(std::ostream & os) {
-        for (const Product & p : (*this))
+        for (const Product & p : _data)
             os << p._id << " - " << p._desc << std::endl;
     } 
+    private:
+    std::vector<Product> _data;
 };
 
 int main() {

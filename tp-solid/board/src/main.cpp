@@ -32,6 +32,7 @@ int main() {
 
     NumBoard b2;
     testNumBoard(b2, fileReporter, reporter);
+    testBoard(b2, fileReporter, reporter);
 
     return 0;
 }

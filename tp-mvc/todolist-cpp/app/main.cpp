@@ -5,17 +5,11 @@
 
 int main()
 {
-    Task t{1, "TODO"};
-    std::cout << showTask(t) << std::endl;
-
     Board b;
-    b.addTodo("First todo");
-    b.addTodo("Second todo");
+    b.addTodo("Réviser l'examen de réseaux");
+    b.addTodo("afficher un board");
 
-    std::cout << std::endl
-              << printBoard(b) << std::endl;
-
-    b.toDone(1);
+    b.toDone(2);
 
     std::cout << std::endl
               << printBoard(b) << std::endl;

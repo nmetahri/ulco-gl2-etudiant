@@ -27,5 +27,33 @@ TEST_CASE( "tryGoLeft, ok" ) {
     REQUIRE( b.getJ() == 2 );
 }
 
-// TODO
+TEST_CASE( "tryGoLeft, exception" ) {
+    BoardTest b(11,11);
+    REQUIRE_THROWS_AS(b.tryGoLeft(), std::invalid_argument);
+}
 
+TEST_CASE( "tryGoRight, wall" ) {
+    BoardTest b(7, 3);
+    b.tryGoRight();
+    REQUIRE( b.getI() == 7 );
+    REQUIRE( b.getJ() == 3 );
+}
+
+TEST_CASE( "moves, ok" ) {
+    BoardTest b(7,3);
+    b.tryGoLeft();
+    REQUIRE( b.getI() == 7 );
+    REQUIRE( b.getJ() == 2 );
+
+    b.tryGoRight();
+    REQUIRE( b.getI() == 7 );
+    REQUIRE( b.getJ() == 3 );
+
+    b.tryGoUp();
+    REQUIRE( b.getI() == 8 );
+    REQUIRE( b.getJ() == 3 );
+
+    b.tryGoDown();
+    REQUIRE( b.getI() == 7 );
+    REQUIRE( b.getJ() == 3 );
+}

@@ -36,8 +36,29 @@ Cell Board::operator()(int i, int j) const {
     return _board[i][j];
 }
 
+void Board::tryGoAt(int i, int j) {
+    try {
+        if ((*this)(_i, _j) == Cell::Free) {
+            _i = i;
+            _j = j;
+        }
+    } catch (std::invalid_argument) {
+        return;
+    }
+}
+
 void Board::tryGoLeft() {
-    _i++;
-    _j++;
-    // TODO
+    tryGoAt(_i, _j - 1);
+}
+
+void Board::tryGoRight() {
+    tryGoAt(_i, _j + 1);
+}
+
+void Board::tryGoUp(){
+    tryGoAt(_i + 1, _j);
+}
+
+void Board::tryGoDown(){
+    tryGoAt(_i - 1, _j);
 }

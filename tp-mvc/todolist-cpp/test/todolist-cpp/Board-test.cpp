@@ -1,5 +1,4 @@
 #include <todolist-cpp/Board.hpp>
-#include <todolist-cpp/View.hpp>
 
 #include <catch2/catch.hpp>
 

@@ -11,5 +11,7 @@ int main()
     Board b;
     b.addTodo("First todo");
 
+    std::cout << std::endl << printBoard(b) << std::endl;
+
     return 0;
 }

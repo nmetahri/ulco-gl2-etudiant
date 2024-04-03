@@ -1,4 +1,5 @@
 #include <todolist-cpp/Board.hpp>
+#include <algorithm>
 
 void Board::addTodo(const std::string &description)
 {
@@ -9,6 +10,12 @@ void Board::addTodo(const std::string &description)
 
 void Board::toDone(int id)
 {
-    // TODO
-    return;
+    const auto it = std::find_if(_todo.begin(), _todo.end(), [id](const Task &task)
+                                 { return task._id == id; });
+
+    if (it != _todo.end())
+    {
+        _done.push_back(*it);
+        _todo.erase(it);
+    }
 }

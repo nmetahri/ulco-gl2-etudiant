@@ -10,8 +10,15 @@ int main()
 
     Board b;
     b.addTodo("First todo");
+    b.addTodo("Second todo");
 
-    std::cout << std::endl << printBoard(b) << std::endl;
+    std::cout << std::endl
+              << printBoard(b) << std::endl;
+
+    b.toDone(1);
+
+    std::cout << std::endl
+              << printBoard(b) << std::endl;
 
     return 0;
 }

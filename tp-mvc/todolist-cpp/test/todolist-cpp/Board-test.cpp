@@ -23,3 +23,21 @@ TEST_CASE("Test addTodos")
     REQUIRE(b._todo.size() == 10);
     REQUIRE(b._todo.back()._id == 10);
 }
+
+TEST_CASE("Test toDone")
+{
+    Board b;
+
+    for (int i = 0; i < 2; i++)
+    {
+        b.addTodo("Ceci est le test n°" + std::to_string(i));
+    }
+
+    REQUIRE(b._todo.size() == 2);
+    REQUIRE(b._done.size() == 0);
+
+    b.toDone(1);
+
+    REQUIRE(b._done.size() == 1);
+    REQUIRE(b._todo.size() == 1);
+}

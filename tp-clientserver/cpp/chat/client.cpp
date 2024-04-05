@@ -9,6 +9,7 @@ int main(int argc, char** argv) {
     hv::WebSocketClient ws;
     ws.onopen = []() {
         std::cout << "connected" << std::endl;
+        std::cout << "Enter a username : " << std::endl;
     };
     ws.onmessage = [](const std::string& msg) {
         std::cout << msg << std::endl;
@@ -20,7 +21,6 @@ int main(int argc, char** argv) {
     ws.open("ws://127.0.0.1:9000");
 
     std::string input;
-    std::cout << "Entrez un message" << std::endl;
     while (true) {
         std::getline(std::cin, input);
 

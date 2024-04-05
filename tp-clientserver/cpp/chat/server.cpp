@@ -15,10 +15,18 @@ int main() {
         std::cout << "client connected" << std::endl;
     };
     ws.onmessage = [&net](const WebSocketChannelPtr& channel, const std::string& msg) {
-        auto sendInput = [&msg](const WebSocketChannelPtr& channel) {
-            channel->send(msg);
-        };
-        net.map(sendInput);
+        if (net.isPending(channel)){
+            if (!net.giveName(channel, msg)) {
+                channel->send("Username already exists !");
+            };
+        } else {
+            const auto name = net.findName(channel);
+            std::string final_message = "[" + name.value() + "] " + msg;
+            auto sendInput = [&final_message](const WebSocketChannelPtr& channel) {
+                channel->send(final_message);
+            };
+            net.map(sendInput);
+        }
     };
     ws.onclose = [&net](const WebSocketChannelPtr& channel) {
         net.del(channel);

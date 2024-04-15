@@ -138,3 +138,35 @@ TEST_CASE("Joueur vert gagne") {
     REQUIRE(jeu.getStatus() == Status::VertGagne);
 }
 
+TEST_CASE("EGALITE") {
+    Jeu jeu;
+
+    jeu.jouer(0,0);
+    jeu.jouer(0,2);
+    jeu.jouer(0,1);
+    jeu.jouer(1,0);
+    jeu.jouer(1,1);
+    jeu.jouer(2,2);
+    jeu.jouer(1,2);
+    jeu.jouer(2,1);
+    jeu.jouer(2,0);
+
+    REQUIRE(jeu.getStatus() == Status::Egalite);
+}
+
+
+TEST_CASE("Win on last round") {
+    Jeu jeu;
+
+    jeu.jouer(0,0); // R
+    jeu.jouer(0,2); // V
+    jeu.jouer(0,1); // R
+    jeu.jouer(1,2); // V
+    jeu.jouer(1,0); // R
+    jeu.jouer(2,0); // V
+    jeu.jouer(1,1); // R
+    jeu.jouer(2,1); // V
+    jeu.jouer(2,2); // R
+
+    REQUIRE(jeu.getStatus() == Status::RougeGagne);
+}

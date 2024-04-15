@@ -59,6 +59,22 @@ bool Jeu::checkVictory(Cell player) const {
     return false;
 }
 
+bool Jeu::checkWin() const {
+    return _status == Status::RougeGagne || _status == Status::VertGagne; 
+}
+
+bool Jeu::checkDraw() const {
+    for (int i = 0; i < _plateau.size(); i++)
+    {
+        for (int j = 0; j < _plateau.size(); j++)
+        {
+            if (getCell(i,j) == Cell::Vide) return false;
+        }
+    }
+    
+    return true;
+}
+
 bool Jeu::jouer(int i, int j) {
     if (!isValidCase(i,j)){
         return false;
@@ -87,8 +103,10 @@ bool Jeu::jouer(int i, int j) {
                 _status = Status::RougeJoue;
             }
             break;
-        default:
-            return false;
+        }
+
+        if (!checkWin() && checkDraw()) {
+            _status = Status::Egalite;
         }
 
         return true;

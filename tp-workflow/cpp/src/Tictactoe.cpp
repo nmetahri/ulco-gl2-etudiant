@@ -44,6 +44,21 @@ std::ostream & operator<<(std::ostream & os, const Jeu & jeu) {
     return os;
 }
 
+bool Jeu::checkVictory(Cell player) const {
+    // Check Colonnes + lignes
+    for (int i = 0; i < 3; i++)
+    {
+        if (getCell(i,0) == player && getCell(i,1) == player && getCell(i,2) == player) return true;
+        if (getCell(0,i) == player && getCell(1,i) == player && getCell(2,i) == player) return true;
+    }
+
+    // Check diagonales
+    if (getCell(0,0) == player && getCell(1,1) == player && getCell(2,2) == player) return true;
+    if (getCell(0,2) == player && getCell(1,1) == player && getCell(2,0) == player) return true;
+
+    return false;
+}
+
 bool Jeu::jouer(int i, int j) {
     if (!isValidCase(i,j)){
         return false;
@@ -56,11 +71,21 @@ bool Jeu::jouer(int i, int j) {
         {
         case Status::RougeJoue:
             _plateau[i][j] = Cell::Rouge;
-            _status = Status::VertJoue;
+
+            if (checkVictory(Cell::Rouge)) {
+                _status = Status::RougeGagne;
+            } else {
+                _status = Status::VertJoue;
+            }
             break;
         case Status::VertJoue:
             _plateau[i][j] = Cell::Vert;
-            _status = Status::RougeJoue;
+
+            if (checkVictory(Cell::Vert)) {
+                _status = Status::VertGagne;
+            } else {
+                _status = Status::RougeJoue;
+            }
             break;
         default:
             return false;

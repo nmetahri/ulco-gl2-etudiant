@@ -16,6 +16,7 @@ class Jeu {
         Status _status;        
 
         bool isValidCase(int i, int j) const;
+        bool checkVictory(Cell player) const;
     public:
         /// Constructeur à utiliser.
         Jeu();

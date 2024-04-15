@@ -112,3 +112,29 @@ TEST_CASE("Jouer case invalide") {
     jeu.jouer(1,1);
     jeu.jouer(1,1);
 }
+
+TEST_CASE("Joueur rouge gagne") {
+    Jeu jeu;
+
+    jeu.jouer(0,0); // Rouge
+    jeu.jouer(0,1);
+    jeu.jouer(1,1); // Rouge
+    jeu.jouer(0,2);
+    jeu.jouer(2,2); // Rouge
+
+    REQUIRE(jeu.getStatus() == Status::RougeGagne);
+}
+
+TEST_CASE("Joueur vert gagne") {
+    Jeu jeu;
+
+    jeu.jouer(0,1);
+    jeu.jouer(0,0); // Vert
+    jeu.jouer(0,2);
+    jeu.jouer(1,1); // Vert
+    jeu.jouer(1,2);
+    jeu.jouer(2,2); // Vert
+
+    REQUIRE(jeu.getStatus() == Status::VertGagne);
+}
+

@@ -53,3 +53,62 @@ TEST_CASE("Affichage grille vide")
 
     REQUIRE(stream.str() == original_stream.str());
 }
+
+TEST_CASE("Jouer case valide affichage") {
+    Jeu jeu;
+    std::stringstream stream;
+    std::stringstream original_stream;
+
+    jeu.jouer(1,1);
+
+    original_stream << jeu;
+    stream << "..." << std::endl << ".R." << std::endl << "..." << std::endl;
+
+    REQUIRE(stream.str() == original_stream.str());
+}
+
+TEST_CASE("Jouer case valide") {
+    Jeu jeu;
+    std::stringstream stream;
+    std::stringstream original_stream;
+
+    jeu.jouer(1,1);
+
+    original_stream << jeu;
+    stream << "..." << std::endl << ".R." << std::endl << "..." << std::endl;
+
+    REQUIRE(stream.str() == original_stream.str());
+}
+
+TEST_CASE("Jouer case prise") {
+    Jeu jeu;
+    std::stringstream stream;
+    std::stringstream original_stream;
+
+    jeu.jouer(1,1);
+    REQUIRE(jeu.jouer(1,1) == false);
+} 
+
+TEST_CASE("Jouer case invalide affichage") {
+    Jeu jeu;
+    std::stringstream stream;
+    std::stringstream original_stream;
+
+    jeu.jouer(1,1);
+    jeu.jouer(1,1);
+
+    original_stream << jeu;
+    stream << "..." << std::endl << ".R." << std::endl << "..." << std::endl;
+
+    REQUIRE(stream.str() == original_stream.str());
+}
+
+
+TEST_CASE("Jouer case invalide") {
+    Jeu jeu;
+    std::stringstream stream;
+    std::stringstream original_stream;
+
+    jeu.jouer(1,1);
+    jeu.jouer(1,1);
+}

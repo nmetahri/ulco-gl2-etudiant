@@ -12,7 +12,8 @@ enum class Cell { Vide, Rouge, Vert };
 class Jeu {
     private:
         std::array<std::array<Cell, 3>, 3> _plateau;
-        // TODO
+
+        Status _status;        
 
         bool isValidCase(int i, int j) const;
     public:

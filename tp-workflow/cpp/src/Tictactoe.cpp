@@ -2,11 +2,11 @@
 
 Jeu::Jeu() {
     raz();
+    _status = Status::RougeJoue;
 }
 
 Status Jeu::getStatus() const {
-    // TODO
-    return Status::RougeJoue;
+    return _status;
 }
 
 bool Jeu::isValidCase(int i, int j) const {
@@ -45,7 +45,30 @@ std::ostream & operator<<(std::ostream & os, const Jeu & jeu) {
 }
 
 bool Jeu::jouer(int i, int j) {
-    // TODO
+    if (!isValidCase(i,j)){
+        return false;
+    }
+
+    auto cell = getCell(i, j);
+
+    if (cell == Cell::Vide) {
+        switch (_status)
+        {
+        case Status::RougeJoue:
+            _plateau[i][j] = Cell::Rouge;
+            _status = Status::VertJoue;
+            break;
+        case Status::VertJoue:
+            _plateau[i][j] = Cell::Vert;
+            _status = Status::RougeJoue;
+            break;
+        default:
+            return false;
+        }
+
+        return true;
+    }
+
     return false;
 }
 

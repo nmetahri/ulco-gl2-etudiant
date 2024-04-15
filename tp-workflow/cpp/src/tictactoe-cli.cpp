@@ -10,6 +10,10 @@ int main() {
 
     std::cout << jeu;
 
+    jeu.jouer(0,1);
+
+    std::cout << jeu;
+
     return 0;
 }
 

@@ -9,8 +9,8 @@ class Gui(Gtk.Window):
     
     def __init__(self):
         super().__init__(title="Tictactoe")
-        self.set_size_request (400, 400)
-        self.case_size = 133
+        self.set_size_request (400, 450)
+        self.case_size = 125
 
         # main vertical box : drawing area + hbox (label, button1, button2)
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -60,12 +60,15 @@ class Gui(Gtk.Window):
                 context.rectangle(pos_x, pos_y, self.case_size, self.case_size)
                 context.fill()
                 
-                if (cell.name == "Rouge"):
-                    context.set_source_rgb(255, 0, 0)
-                    context.arc(pos_x + self.case_size / 2, pos_y + self.case_size / 2, 1.0, 0.0, 2 * math.pi)
-                elif (cell.name == "Vert"): 
-                    context.set_source_rgb(0, 255, 0)
-                    context.arc(pos_x + self.case_size / 2, pos_y + self.case_size / 2, 1.0, 0.0, 2 * math.pi)
+                if (cell.name != "Vide"):
+                    if (cell.name == "Rouge"):
+                        context.set_source_rgb(255, 0, 0)
+                    elif (cell.name == "Vert"):
+                        context.set_source_rgb(0, 255, 0)
+                    else :
+                        break
+                    context.arc(pos_x + self.case_size / 2, pos_y + self.case_size / 2, self.case_size / 2 - 10, 0.0, 2 * math.pi)
+                    context.fill()
 
                 context.set_source_rgb(0.5, 0.5, 0.5)
             
@@ -84,10 +87,9 @@ class Gui(Gtk.Window):
         # TODO on_area_button_press
         if event.button == 1:
             print('TODO on_area_button_press')
-            
+
 
     def on_button1_clicked(self, widget):
-        # TODO on_button1_clicked
         self.game = Jeu()
         self.drawingarea.queue_draw()
 

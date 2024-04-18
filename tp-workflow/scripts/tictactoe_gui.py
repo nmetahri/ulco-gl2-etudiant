@@ -49,6 +49,35 @@ class Gui(Gtk.Window):
         width = widget.get_allocated_width()
         height = widget.get_allocated_height()
 
+        for i in range(0,3):
+            for j in range(0,3):
+                cell = self.game.getCell(i,j)
+
+                pos_x = self.case_size * i
+                pos_y = self.case_size * j
+
+                context.set_source_rgb(0, 0, 0)
+                context.rectangle(pos_x, pos_y, self.case_size, self.case_size)
+                context.fill()
+                
+                if (cell.name == "Rouge"):
+                    context.set_source_rgb(255, 0, 0)
+                    context.arc(pos_x + self.case_size / 2, pos_y + self.case_size / 2, 1.0, 0.0, 2 * math.pi)
+                elif (cell.name == "Vert"): 
+                    context.set_source_rgb(0, 255, 0)
+                    context.arc(pos_x + self.case_size / 2, pos_y + self.case_size / 2, 1.0, 0.0, 2 * math.pi)
+
+                context.set_source_rgb(0.5, 0.5, 0.5)
+            
+                context.set_line_width(3)
+
+                context.move_to(pos_x + self.case_size, pos_y)
+                context.line_to(pos_x + self.case_size, pos_y + self.case_size)
+                context.stroke()
+
+                context.move_to(pos_x + self.case_size, pos_y + self.case_size)
+                context.line_to(pos_x, pos_y + self.case_size)
+                context.stroke()
 
 
     def on_area_button_press(self, widget, event):

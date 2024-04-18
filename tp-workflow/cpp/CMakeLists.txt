@@ -5,6 +5,7 @@ project( tictactoe )
 add_library( tictactoe 
     src/tictactoe-cli.cpp 
     src/Tictactoe.cpp
+    src/TictactoeTextInterface.cpp
     )
 
 add_executable( tictactoe-cli src/tictactoe-cli.cpp )

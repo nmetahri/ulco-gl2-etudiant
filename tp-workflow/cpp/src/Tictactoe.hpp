@@ -16,9 +16,6 @@ class Jeu {
         Status _status;        
 
         bool isValidCase(int i, int j) const;
-        bool checkVictory(Cell player) const;
-        bool checkDraw() const;
-        bool checkWin() const;
     public:
         /// Constructeur à utiliser.
         Jeu();
@@ -42,6 +39,15 @@ class Jeu {
 
         /// Réinitialise le jeu.
         void raz();
+
+        /// Check if given player won
+        bool checkVictory(Cell player) const;
+
+        /// Check if game status is draw
+        bool checkDraw() const;
+
+        /// Check if any player won 
+        bool isGameFinished() const;
 
         friend std::ostream & operator<<(std::ostream & os, const Jeu & jeu);
 };

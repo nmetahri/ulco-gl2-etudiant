@@ -59,8 +59,8 @@ bool Jeu::checkVictory(Cell player) const {
     return false;
 }
 
-bool Jeu::checkWin() const {
-    return _status == Status::RougeGagne || _status == Status::VertGagne; 
+bool Jeu::isGameFinished() const {
+    return _status == Status::RougeGagne || _status == Status::VertGagne || _status == Status::Egalite; 
 }
 
 bool Jeu::checkDraw() const {
@@ -105,7 +105,7 @@ bool Jeu::jouer(int i, int j) {
             break;
         }
 
-        if (!checkWin() && checkDraw()) {
+        if (!isGameFinished() && checkDraw()) {
             _status = Status::Egalite;
         }
 

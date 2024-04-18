@@ -10,6 +10,7 @@ class Gui(Gtk.Window):
     def __init__(self):
         super().__init__(title="Tictactoe")
         self.set_size_request (400, 400)
+        self.case_size = 133
 
         # main vertical box : drawing area + hbox (label, button1, button2)
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -26,33 +27,28 @@ class Gui(Gtk.Window):
         hbox = Gtk.Box()
         vbox.pack_end(hbox, False, False, 0)
         # label
-        self.label = Gtk.Label(label="TODO")
+        self.label = Gtk.Label(label="Starting...")
         hbox.pack_start(self.label, True, True, 0)
-        # TODO button1
+        # button1
+        button1 = Gtk.Button(label="rejouer")
+        button1.connect("clicked", self.on_button1_clicked)
+        hbox.pack_start(button1, True, True, 0)
         # button2
         button2 = Gtk.Button(label="quitter")
         button2.connect("clicked", self.on_button2_clicked)
         hbox.pack_start(button2, True, True, 0)
 
-        # TODO create game (from the C++ module)
-        self.game = Jeu()    
+        # create game (from the C++ module)
+        self.game = Jeu()
+        # print(self.game.isGameFinished())
+    
 
     def on_draw(self, widget, context):
-
-        # TODO on_draw
+        self.label.set_text(self.game.getStatus().name)
         
         width = widget.get_allocated_width()
         height = widget.get_allocated_height()
 
-        context.set_source_rgb(0, 0, 0)
-        context.rectangle(0, 0, 100, 100)
-        context.fill()
-
-        context.set_source_rgb(0.5, 0.5, 0.5)
-        context.set_line_width(3)
-        context.move_to(width, 0)
-        context.line_to(0, height)
-        context.stroke()
 
 
     def on_area_button_press(self, widget, event):
@@ -63,7 +59,7 @@ class Gui(Gtk.Window):
 
     def on_button1_clicked(self, widget):
         # TODO on_button1_clicked
-        print('TODO on_button1_clicked')
+        self.game = Jeu()
         self.drawingarea.queue_draw()
 
     def on_button2_clicked(self, widget):

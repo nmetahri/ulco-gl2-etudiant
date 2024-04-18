@@ -84,9 +84,12 @@ class Gui(Gtk.Window):
 
 
     def on_area_button_press(self, widget, event):
-        # TODO on_area_button_press
         if event.button == 1:
-            print('TODO on_area_button_press')
+            coords = widget.get_pointer()
+            i = coords.x // self.case_size
+            j = coords.y // self.case_size
+            self.game.jouer(i,j)
+            self.drawingarea.queue_draw()
 
 
     def on_button1_clicked(self, widget):

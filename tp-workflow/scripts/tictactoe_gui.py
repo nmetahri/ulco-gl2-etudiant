@@ -1,5 +1,6 @@
 import gi
 import math
+from tictactoe import *
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
@@ -34,6 +35,7 @@ class Gui(Gtk.Window):
         hbox.pack_start(button2, True, True, 0)
 
         # TODO create game (from the C++ module)
+        self.game = Jeu()    
 
     def on_draw(self, widget, context):
 

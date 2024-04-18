@@ -10,7 +10,7 @@ Status Jeu::getStatus() const {
 }
 
 bool Jeu::isValidCase(int i, int j) const {
-    return (i < _plateau.size() && i >= 0 && j < _plateau.size() && j >= 0);
+    return (i < Jeu::GRID_SIZE && i >= 0 && j < Jeu::GRID_SIZE && j >= 0);
 }
 
 Cell Jeu::getCell(int i, int j) const {
@@ -22,8 +22,8 @@ Cell Jeu::getCell(int i, int j) const {
 }
 
 std::ostream & operator<<(std::ostream & os, const Jeu & jeu) {
-    for (int i = 0; i < jeu._plateau.size() ; i++) {
-        for (int j = 0; j < jeu._plateau.size() ; j++) {
+    for (int i = 0; i < jeu.Jeu::GRID_SIZE ; i++) {
+        for (int j = 0; j < jeu.Jeu::GRID_SIZE ; j++) {
             auto cell = jeu.getCell(i, j);
             switch (cell)
             {
@@ -64,9 +64,9 @@ bool Jeu::isGameFinished() const {
 }
 
 bool Jeu::checkDraw() const {
-    for (int i = 0; i < _plateau.size(); i++)
+    for (int i = 0; i < Jeu::GRID_SIZE; i++)
     {
-        for (int j = 0; j < _plateau.size(); j++)
+        for (int j = 0; j < Jeu::GRID_SIZE; j++)
         {
             if (getCell(i,j) == Cell::Vide) return false;
         }
@@ -103,6 +103,8 @@ bool Jeu::jouer(int i, int j) {
                 _status = Status::RougeJoue;
             }
             break;
+        default:
+            return false;
         }
 
         if (!isGameFinished() && checkDraw()) {
@@ -116,7 +118,7 @@ bool Jeu::jouer(int i, int j) {
 }
 
 void Jeu::raz() {
-    for (int i = 0; i < _plateau.size() ; i++) {
+    for (int i = 0; i < Jeu::GRID_SIZE ; i++) {
         _plateau[i].fill(Cell::Vide);
     }
 }

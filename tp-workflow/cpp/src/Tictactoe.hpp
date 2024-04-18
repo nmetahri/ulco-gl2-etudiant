@@ -50,6 +50,8 @@ class Jeu {
         bool isGameFinished() const;
 
         friend std::ostream & operator<<(std::ostream & os, const Jeu & jeu);
+
+        int GRID_SIZE = 3;
 };
 
 std::ostream & operator<<(std::ostream & os, const Jeu & jeu);
